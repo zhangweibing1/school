@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["workProposer"],{7426:function(o,r,n){},b1b5:function(o,r,n){"use strict";n.r(r);var e=function(){var o=this,r=o.$createElement,n=o._self._c||r;return n("div",{staticClass:"workProposer"})},t=[],s={name:"workProposer",data:function(){return{}}},a=s,c=(n("c667"),n("2877")),i=Object(c["a"])(a,e,t,!1,null,"3b883af7",null);i.options.__file="workProposer.vue";r["default"]=i.exports},c667:function(o,r,n){"use strict";var e=n("7426"),t=n.n(e);t.a}}]);
+//# sourceMappingURL=workProposer.a97b6032.js.map
