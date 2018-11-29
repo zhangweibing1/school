@@ -29,7 +29,7 @@
                 </li>
             </ul>
         </div>
-        <button>退出登录</button>
+        <button @click="logout()">退出登录</button>
     </div>
 </template>
 
@@ -45,6 +45,13 @@ export default {
   methods: {
     jump(item) {
       this.$router.push(item);
+    },
+    logout() {
+      localStorage.clear();
+      this.$store.dispatch('system/setUserInfo', null);
+      this.$store.dispatch('system/setMenu', null);
+      this.$store.dispatch('system/setToken', null);
+      this.$router.push('/');
     },
   },
   mounted() {

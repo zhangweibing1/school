@@ -41,7 +41,7 @@ export function setPsd(data) {
 export function setNewPsd(data) {
   return request({
     method: 'post',
-    url: '/api/mobileSysUser/update/password',
+    url: '/api/sysUserMobile/update/password',
     data,
   });
 }

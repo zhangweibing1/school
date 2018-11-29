@@ -30,13 +30,6 @@ module.exports = {
         changeOrigin: true,
       },
       '/api': {
-        // target: 'http://sxqfwl2015.6655.la:20083/',
-        // target: 'http://47.92.204.199:8061/',
-        // target: 'http://192.168.20.31:8090/',
-        // target: 'http://192.168.3.160:8091/',
-        // target: 'http://192.168.20.26:8090/',
-        // target: 'http://192.168.3.188:8084/',
-        // target: 'http://192.168.20.34:8090/',
         target: 'http://192.168.10.89:8090/',
         pathRewrite: {
           '^/api': '',

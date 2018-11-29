@@ -35,6 +35,7 @@ export default {
       psdError: false,
       newPassword: '',
       psdForm: {
+        id: '',
         loginId: '',
         oldPassword: '',
         password: '',
@@ -53,14 +54,22 @@ export default {
     },
     async setNewPsd() {
       this.psdForm.loginId = this.userInfo.sysLogin.id;
+      this.psdForm.id = this.userInfo.id;
       const data = await setNewPsd(this.psdForm);
       console.log(data);
       if (data.httpCode === 200 || '200') {
         this.$toast('修改成功！');
-        this.$router.go(-1);
+        this.logout();
       } else {
         this.$toast('修改失败！');
       }
+    },
+    logout() {
+      localStorage.clear();
+      this.$store.dispatch('system/setUserInfo', null);
+      this.$store.dispatch('system/setMenu', null);
+      this.$store.dispatch('system/setToken', null);
+      this.$router.push('/');
     },
     submit() {
       if (this.psdForm.oldPassword === '') {
