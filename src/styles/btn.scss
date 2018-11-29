@@ -1,0 +1,18 @@
+@import './variables.scss';
+@import './function.scss';
+.btn{
+  border: 0px;
+  color: #000;
+  &.large{
+    width: adap(686px);
+    height: adap(94px);
+    font-size: adap(36px);
+  }
+  &.radius{
+    border-radius: adap(16px);
+  }
+  &.blue{
+    color: #fff;
+    background-color: $blue;
+  }
+}

@@ -1,0 +1,29 @@
+.van-cell{
+  font-size: 16px;
+}
+.van-cell__value{
+  font-size: 14px;
+  color:#666;
+}
+.van-nav-bar__text,
+.van-tab--active {
+  color:#1890ff;
+}
+.van-tabs__line{
+  background-color: #1890ff;
+}
+.van-field .van-cell__title{
+  max-width: 120px;
+}
+.van-tabs__wrap {
+  top: 46px;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  overflow: hidden;
+  position: fixed;
+}
+.van-tabbar-item__icon img{
+  width: 25px;
+  height: 25px;
+}

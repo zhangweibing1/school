@@ -1,0 +1,39 @@
+@import './function.scss';
+
+$size-big:    adap(34px);
+$size-middle: adap(28px);
+$size-small:  adap(24px);
+$size-huge:   adap(48px);
+
+$gray:        #ccc;
+$black-light: #333;
+$gray-dark:   #999;
+$blue:        #1890ff;
+$Threecolor:  #333;
+$Sixcolor:    #666;
+$Ninecolor:   #999;
+$HeadColor:   #1c1c1c;
+$borderBom:   #e7e7e7;
+
+$pane-padding: adap(25px);
+
+$success:     #51bf61;
+$warning:     #ea9542;
+$danger:      #ff5757;
+
+html {
+  background-color: #fafaff;
+}
+li{
+  list-style: none;
+}
+.overflow-h{
+  overflow: hidden;
+}
+ul{
+  padding: 0;
+  margin: 0;
+}
+i{
+  font-style: normal;
+}
