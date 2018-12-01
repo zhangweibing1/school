@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="me">
         <div class="top">
             <div class="touxiang">
                 <img src="../../assets/myedu/touxiang.png" alt="">
@@ -12,7 +12,7 @@
         </div>
         <div class="wrapper">
             <ul>
-                <li class="list">
+                <li class="list" @click="jump('feedback')">
                     <img class="icon" src="../../assets/myedu/icon_2.png" alt="">
                     <span>用户反馈</span>
                     <img class="right" src="../../assets/myedu/right.png" alt="">
@@ -20,6 +20,11 @@
                 <li class="list" @click="jump('accountSafe')">
                     <img class="icon" src="../../assets/myedu/icon_2.png" alt="">
                     <span>修改密码</span>
+                    <img class="right" src="../../assets/myedu/right.png" alt="">
+                </li>
+                <li class="list" @click="jump('mysq')">
+                    <img class="icon" src="../../assets/myedu/icon_2.png" alt="">
+                    <span>设置密保</span>
                     <img class="right" src="../../assets/myedu/right.png" alt="">
                 </li>
                 <li class="list" @click="jump('aboutUs')">
@@ -94,6 +99,7 @@ export default {
 .picture{
     width: 100%;
     background: #4085dd;
+    height: 50px;
 }
 .picture img{
     width: 100%;

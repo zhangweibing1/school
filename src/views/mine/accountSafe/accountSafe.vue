@@ -1,7 +1,7 @@
 <template>
   <div class="accountSafe">
     <van-nav-bar
-      title="帐号与安全"
+      title="修改密码"
       left-text="返回"
       left-arrow
       fixed
@@ -43,7 +43,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('system', ['userInfo']),
+    ...mapGetters('system' , ['userInfo']),
   },
   methods: {
     onClickLeft() {

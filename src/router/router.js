@@ -120,6 +120,18 @@ export default new Router({
       meta: { webview, tabBar: false },
     },
     {
+      path: '/feedback',
+      name: 'feedback',
+      component: () => import(/* webpackChunkName: "setting" */ '@/views/mine/feedback/feedback.vue'),
+      meta: { webview, tabBar: false },
+    },
+    {
+      path: '/mysq',
+      name: 'mysq',
+      component: () => import(/* webpackChunkName: "setting" */ '@/views/mine/setting/mysq.vue'),
+      meta: { webview, tabBar: false },
+    },
+    {
       path: '/accountSafe',
       name: 'accountSafe',
       component: () => import(/* webpackChunkName: "accountSafe" */ '@/views/mine/accountSafe/accountSafe.vue'),

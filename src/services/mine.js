@@ -45,3 +45,11 @@ export function setNewPsd(data) {
     data,
   });
 }
+
+export function getMySQ(data) {
+  return request({
+    method: 'post',
+    url: '/api/v2/sysMysqMobile/read/getmysq',
+    data,
+  });
+}
