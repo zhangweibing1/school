@@ -56,12 +56,13 @@ export default {
       this.psdForm.loginId = this.userInfo.sysLogin.id;
       this.psdForm.id = this.userInfo.id;
       const data = await setNewPsd(this.psdForm);
-      console.log(data);
-      if (data.httpCode === 200 || '200') {
+      if (data.httpCode === '200') {
         this.$toast('修改成功！');
         this.logout();
-      } else {
-        this.$toast('修改失败！');
+      } else if(data.httpCode === '403'){
+        this.$toast(data.msg);
+      }else{
+        this.$toast(data.msg);
       }
     },
     logout() {

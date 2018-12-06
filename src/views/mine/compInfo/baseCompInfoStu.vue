@@ -261,6 +261,9 @@ export default {
         RXQHKLBMTEXT: '',
         sign: '',
       },
+      submitStu: {
+        submitUser:''
+      },
       parent: {
         parentId: 0,
       },
@@ -560,10 +563,11 @@ export default {
       this.submitMsg.CSRQ = this.csrq;
       this.submitMsg.email = this.email;
       this.submitMsg.userName = this.userName;
-      this.submitMsg.sfzjh = this.sfzjh;
+      this.submitMsg.SFZJH = this.sfzjh;
       this.submitMsg.phone = this.phone;
       this.submitMsg.address = this.address;
-      this.submitData(this.submitMsg);
+      this.submitStu["submitUser"] = this.submitMsg;
+      this.submitData(this.submitStu);
     },
   },
   mounted() {

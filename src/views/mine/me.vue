@@ -12,6 +12,18 @@
         </div>
         <div class="wrapper">
             <ul>
+                <li v-if="$store.state.system.userInfo.userType == 1" class="list" @click="jump('baseCompInfoStu')">
+                    <img class="icon" src="../../assets/myedu/icon_2.png" alt="">
+                    <span>学生信息编辑</span>
+                    <img class="right" src="../../assets/myedu/right.png" alt="">
+                </li>
+
+                <li v-if="$store.state.system.userInfo.userType == 2" class="list" @click="jump('baseCompInfoTea')">
+                    <img class="icon" src="../../assets/myedu/icon_2.png" alt="">
+                    <span>教师信息编辑</span>
+                    <img class="right" src="../../assets/myedu/right.png" alt="">
+                </li>
+
                 <li class="list" @click="jump('feedback')">
                     <img class="icon" src="../../assets/myedu/icon_2.png" alt="">
                     <span>用户反馈</span>

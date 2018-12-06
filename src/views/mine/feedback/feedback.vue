@@ -8,31 +8,80 @@
       fixed
       @click-left="onClickLeft"/>
       <div class="wrapper">
-        <textarea name="fk" id="" cols="" rows="" placeholder="请输入您宝贵的意见或建议..."></textarea>
-        <input type="text" placeholder="请输入您的联系方式">
-        <button>提交</button>
+        <textarea v-model="content" cols="" rows="" placeholder="请输入您宝贵的意见或建议..."></textarea>
+        <van-cell-group>
+            <van-cell title="得分" icon="location">
+                <van-rate v-model="score" />
+            </van-cell>
+            <van-cell >
+                <van-checkbox v-model="isAnonymose">匿名</van-checkbox>
+            </van-cell>
+        </van-cell-group>
+
+        <div class="btn-group">
+            <van-button size="large" class="btn blue" @click="submit()">提交</van-button>
+        </div>
       </div>
     </div>
 </template>
 <script>
+
+import backButton from '@/components/backButton/backButton.vue';
+import { Rate,Checkbox, CheckboxGroup,Icon} from 'vant';
+import { submitFeedBack } from '@/services/mine.js'
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'feedback',
   data() {
     return {
+        content: '',
+        isAnonymose: '',
+        score : '',
+        submitMsg:{
+            userId: '',
+            content: '',
+            isAnonymose: '',
+            score: '',
+        }
     };
   },
   methods: {
     onClickLeft() {
       this.$router.go(-1);
     },
+    async submitFeedBack(info) {
+      const data = await submitFeedBack(info);
+      if (data.httpCode === '200' || 200) {
+        this.$toast.success('提交成功');
+        this.$router.go(-1);
+      } else {
+        this.$toast.fail('提交失败');
+      }
+    },
+    submit(){
+        this.submitMsg.userId = this.$store.state.system.userInfo.id;
+        if(this.isAnonymose){
+            this.submitMsg.isAnonymose = "1";
+        }else{
+            this.submitMsg.isAnonymose = "2";
+        }
+        this.submitMsg.score = this.score;
+        this.submitMsg.content = this.content;
+        this.submitFeedBack(this.submitMsg);
+    }
   },
-  mounted() {
+  computed: {
+      ...mapGetters('system', ['userInfo']),
   },
 };
 </script>
 <style lang="scss" scoped>
 .feedback{
     padding: 45px 18px;
+}
+.wrapper{
+    margin-top:5%
 }
 textarea{
     border:0;

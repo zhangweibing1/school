@@ -214,8 +214,8 @@
 
 <script>
 import backButton from '@/components/backButton/backButton.vue';
-import { areaData, submitData, Dic, getTeaDetail,submitTeaData } from '@/services/completeInfo';
-import { mapGetters } from 'vuex';
+import { areaData, Dic, getTeaDetail,submitTeaData } from '@/services/completeInfo';
+ 
 
 export default {
   name: 'completeInfo',

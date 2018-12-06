@@ -2,19 +2,28 @@
   <div class="mysq">
     <van-nav-bar title="设置密保" left-text="返回" right-text=" "
     left-arrow fixed @click-left="onClickLeft" />
-    <div class="form">
-      <div v-for="n in mysqList" :key="n.sysSecurityquestion.id"
-      :id="n.sysSecurityquestion.id" class="q">
-        <p>问题：{{n.sysSecurityquestion.content}}</p>
-        <input type="text" placeholder="输入问题的答案" required/>
+    <van-cell-group>
+            <div :index="index" v-for="(value,index) in dataModel" :key="value.id"  class="q">
+            <div class="top">
+              <van-field
+                clearable         
+                v-model=dataModel[index].content
+                icon="question"
+                @click-icon="$toast('密保问题')"
+              />
+              <van-field v-model=dataModel[index].answer required placeholder="请输入答案" /> 
+            </div>
       </div>
-      <button>提交</button>
+    </van-cell-group>
+      <div class="btn-group">
+            <van-button size="large" class="btn blue" @click="submitRequire()">提交</van-button>
+        </div>
     </div>
-  </div>
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import { getMySQ } from '@/services/mine';
+import { getMySQ,submitMqData} from '@/services/mine';
+import { Field } from 'vant';
 
 export default {
   name: 'mysq',
@@ -22,6 +31,8 @@ export default {
     return {
       mysqList: [],
       appJSObject: window.AppJSObject,
+      dataModel:[],
+      submitData:{sqDataOne:'',sqDataTwo:''},
     };
   },
   computed: {
@@ -32,11 +43,44 @@ export default {
       this.$router.go(-1);
     },
     async getMySQ() {
-      // userId: this.userInfo.id,
-      const data = await getMySQ({ loginId: this.userInfo.loginId });
+      const data = await getMySQ({ loginId: this.$store.state.system.userInfo.loginId });
       this.mysqList = data.data;
-      console.log(data);
+      for(let i in this.mysqList){
+        let obj = new Object();
+        obj["id"] = this.mysqList[i]["id"];
+        obj["content"] = this.mysqList[i]["sysSecurityquestion"]["content"];
+        obj["answer"] = this.mysqList[i]["answer"];
+        obj["sqId"] = this.mysqList[i]["sqId"];
+        obj["loginId"] = this.mysqList[i]["loginId"];
+        this.dataModel.push(obj);
+      }
     },
+
+    async submit(msInfo) {
+      const data = await submitMqData(msInfo);
+      if (data.httpCode === '200' || 200) {
+        this.$toast.success('提交成功');
+        this.$router.go(-1);
+      } else {
+        this.$toast.fail('提交失败');
+      }
+
+    },
+
+    submitRequire(){
+      for(let i in this.dataModel){
+        if(this.dataModel[i]["answer"] == ""){
+          this.$toast('请填写答案');
+          return;
+        }
+        if(i == 0){
+          this.submitData.sqDataOne = this.dataModel[i]
+        }else{
+          this.submitData.sqDataTwo = this.dataModel[i]
+        }
+      }
+      this.submit(this.submitData);
+    }
   },
   mounted() {
     this.getMySQ();
@@ -49,6 +93,10 @@ export default {
   }
   .q {
     margin-bottom: 15px;
+  }
+  .top{
+    margin-top: 11px;
+    background: #fafaff;
   }
   input {
     outline-offset: 0;
