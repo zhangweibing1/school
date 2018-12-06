@@ -8,11 +8,11 @@ import request from '@/utils/request';
  * @return {[type]}      [description]
  */
 export function getCode(data) {
-  return request({
-    method: 'post',
-    url: '/api/loginBeforeMobile/send/code',
-    data,
-  });
+    return request({
+        method: 'post',
+        url: '/api/loginBeforeMobile/send/code',
+        data,
+    });
 }
 
 /**
@@ -24,11 +24,11 @@ export function getCode(data) {
  * @return {[type]}      [description]
  */
 export function setPsd(data) {
-  return request({
-    method: 'post',
-    url: '/api/loginBeforeMobile/update/passwordByCode',
-    data,
-  });
+    return request({
+        method: 'post',
+        url: '/api/loginBeforeMobile/update/passwordByCode',
+        data,
+    });
 }
 
 /**
@@ -39,17 +39,40 @@ export function setPsd(data) {
  * @return {[type]}      [description]
  */
 export function setNewPsd(data) {
-  return request({
-    method: 'post',
-    url: '/api/sysUserMobile/update/password',
-    data,
-  });
+    return request({
+        method: 'post',
+        url: '/api/sysUserMobile/update/password',
+        data,
+    });
 }
 
 export function getMySQ(data) {
-  return request({
-    method: 'post',
-    url: '/api/v2/sysMysqMobile/read/getmysq',
-    data,
-  });
+    return request({
+        method: 'post',
+        url: '/api/v2/sysMysqMobile/read/getmysq',
+        data,
+    });
+}
+/**
+ * 提交反馈
+ * @param {} data 
+ */
+export function submitFeedBack(data) {
+    return request({
+        method: 'put',
+        url: '/api/mobileFeedBack/write/saveFeedBack/',
+        data,
+    });
+}
+
+/**
+ * 提交密保结果
+ * @param {} data 
+ */
+export function submitMqData(data) {
+    return request({
+        method: 'post',
+        url: '/api/v2/sysMysqMobile/write/updateMqData/',
+        data,
+    });
 }
