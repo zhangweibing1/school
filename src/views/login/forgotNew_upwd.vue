@@ -9,15 +9,15 @@
     <div class="wrap">
       <p>你的登陆账号是：{{account}}</p>
       <div class="form">
-        <input type="password" v-model="password" @focus="diserror"
+        <input type="password" v-model="password" @focus="diserror" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"
          name="phone" placeholder="请输入新密码（6-16个字符或数字）" required />
         <input type="password" v-model="newPassword" placeholder="请再次输入新密码"
-         @focus="diserror" required />
+         @focus="diserror" required onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" />
         <p class="error" v-if="psdError">两次输入密码不一致，请重新输入！</p>
       </div>
     </div>
     <div class="btn-group">
-      <van-button size="large" class="btn blue" @click="submit()">完成</van-button>
+      <van-button size="large" class="btn blue" @click="submitRequired()">完成</van-button>
     </div>
   </div>
 </template>
@@ -51,22 +51,7 @@ export default {
     diserror() {
       this.psdError = false;
     },
-    async submitData(pwdData) {
-      const data = await updatePwd(pwdData);
-      if (data.httpCode === '200') {
-        this.$toast('修改成功！');
-        this.logout();
-      } else if(data.httpCode === '403'){
-        this.$toast(data.msg);
-      }else{
-        this.$toast(data.msg);
-      }
-    },
-    logout() {
-      localStorage.clear();
-      this.$router.push('/');
-    },
-    submit() {
+    submitRequired() {
       if (this.password === '') {
         this.$toast('请填写旧密码！');
         return;
@@ -79,9 +64,28 @@ export default {
         this.psdError = true;
         return;
       }
+      if(this.password.length<6 || this.password.length>16){
+         this.$toast('请注意密码长度');
+         return;
+      }
       this.submitMsg.password = this.newPassword;
       this.submitMsg.id = this.loginId;
-      this.submitData(this.submitMsg);
+      this.submit(this.submitMsg);
+    },
+    async submit(info) {
+      let data = await updatePwd(info);
+      if (data.httpCode === '200') {
+        this.$toast('修改成功！');
+        this.logout();
+      } else if(data.httpCode === '403'){
+        this.$toast(data.msg);
+      }else{
+        this.$toast(data.msg);
+      }
+    },
+    async logout() {
+      localStorage.clear();
+      this.$router.push('/');
     },
   },
   mounted() {

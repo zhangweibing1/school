@@ -6,12 +6,12 @@
             <div :index="index" v-for="(value,index) in dataModel" :key="value.id"  class="q">
             <div class="top">
               <van-field
-                clearable         
+                clearable
                 v-model=dataModel[index].content
                 icon="question"
                 @click-icon="$toast('密保问题')"
               />
-              <van-field v-model=dataModel[index].answer required placeholder="请输入答案" /> 
+              <van-field v-model=dataModel[index].answer required placeholder="请输入答案"/>
             </div>
       </div>
     </van-cell-group>
@@ -22,17 +22,16 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import { getMySQ,submitMqData} from '@/services/mine';
+import { getMySQ, submitMqData } from '@/services/mine';
 import { Field } from 'vant';
-
 export default {
   name: 'mysq',
   data() {
     return {
       mysqList: [],
       appJSObject: window.AppJSObject,
-      dataModel:[],
-      submitData:{sqDataOne:'',sqDataTwo:''},
+      dataModel: [],
+      submitData: { sqDataOne: '', sqDataTwo: '' },
     };
   },
   computed: {
@@ -45,17 +44,16 @@ export default {
     async getMySQ() {
       const data = await getMySQ({ loginId: this.$store.state.system.userInfo.loginId });
       this.mysqList = data.data;
-      for(let i in this.mysqList){
-        let obj = new Object();
-        obj["id"] = this.mysqList[i]["id"];
-        obj["content"] = this.mysqList[i]["sysSecurityquestion"]["content"];
-        obj["answer"] = this.mysqList[i]["answer"];
-        obj["sqId"] = this.mysqList[i]["sqId"];
-        obj["loginId"] = this.mysqList[i]["loginId"];
+      for (const i in this.mysqList) {
+        const obj = new Object();
+        obj['id'] = this.mysqList[i]['id'];
+        obj['content'] = this.mysqList[i]['sysSecurityquestion']['content'];
+        obj['answer'] = this.mysqList[i]['answer'];
+        obj['sqId'] = this.mysqList[i]['sqId'];
+        obj['loginId'] = this.mysqList[i]['loginId'];
         this.dataModel.push(obj);
       }
     },
-
     async submit(msInfo) {
       const data = await submitMqData(msInfo);
       if (data.httpCode === '200' || 200) {
@@ -64,23 +62,21 @@ export default {
       } else {
         this.$toast.fail('提交失败');
       }
-
     },
-
-    submitRequire(){
-      for(let i in this.dataModel){
-        if(this.dataModel[i]["answer"] == ""){
+    submitRequire () {
+      for (const i in this.dataModel) {
+        if (this.dataModel[i]['answer'] === '') {
           this.$toast('请填写答案');
           return;
         }
-        if(i == 0){
-          this.submitData.sqDataOne = this.dataModel[i]
-        }else{
-          this.submitData.sqDataTwo = this.dataModel[i]
+        if (i === 0) {
+          this.submitData.sqDataOne = this.dataModel[i];
+        } else {
+          this.submitData.sqDataTwo = this.dataModel[i];
         }
       }
       this.submit(this.submitData);
-    }
+    },
   },
   mounted() {
     this.getMySQ();

@@ -88,13 +88,24 @@ export function queryMqByAccount(data) {
     });
 }
 /**
+ * 根据账号查询密保
+ * @param {} data 
+ */
+export function queryMqByAccountT(data) {
+    return request({
+        method: 'post',
+        url: '/api/v2/sysMysqMobile/read/queryMqByAccountT',
+        data,
+    });
+}
+/**
  * 修改密码
  * @param {} data 
  */
 export function updatePwd(data) {
     return request({
         method: 'post',
-        url: '/api/sysUserMobile/write/password',
+        url: '/api/v2/sysMysqMobile/write/updateLogin',
         data,
     });
 }

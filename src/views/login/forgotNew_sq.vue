@@ -6,7 +6,7 @@
             <div :index="index" v-for="(value,index) in dataModel" :key="value.id"  class="q">
             <div class="top">
               <van-field
-                clearable         
+                clearable disabled      
                 v-model=dataModel[index].content
                 icon="question"
                 @click-icon="$toast('密保问题')"
@@ -22,7 +22,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import { getMySQ,submitMqData,queryMqByAccount} from '@/services/mine';
+import { getMySQ,submitMqData,queryMqByAccountT} from '@/services/mine';
 import { Field } from 'vant';
 
 export default {
@@ -45,7 +45,7 @@ export default {
     },
     async query() {
       this.submitMsg.account = this.$route.params.account;
-      const data = await queryMqByAccount(this.submitMsg);
+      const data = await queryMqByAccountT(this.submitMsg);
       let list = data.data
     for(let i in list){
         let obj = new Object();
