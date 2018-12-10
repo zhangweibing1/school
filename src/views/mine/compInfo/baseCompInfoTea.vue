@@ -43,7 +43,7 @@
               @confirm="onXz"/>
             </van-popup>
 
-          
+
           <van-field label="邮箱"
             v-model="email"
             required
@@ -213,9 +213,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import backButton from '@/components/backButton/backButton.vue';
-import { areaData, Dic, getTeaDetail,submitTeaData } from '@/services/completeInfo';
- 
+import { areaData, Dic, getTeaDetail, submitTeaData } from '@/services/completeInfo';
+
 
 export default {
   name: 'completeInfo',
@@ -225,11 +226,11 @@ export default {
       showCity: false,
       showCounty: false,
       showTime: false,
-      showJoinTime: false,  // 参加工作年月
+      showJoinTime: false, // 参加工作年月
       showxz: false, // 任教学段
-      showzc: false, //职称
-      showgw: false, //岗位级别
-      showxl: false, //学历
+      showzc: false, // 职称
+      showgw: false, // 岗位级别
+      showxl: false, // 学历
       showMz: false,
       showXb: false,
       showZzmm: false,
@@ -266,7 +267,7 @@ export default {
       userName: '', // 姓名
       csrq: '请选择', // 出生日期
       mz: '', // 民族
-      mzText: '请选择', //民族值
+      mzText: '请选择', // 民族值
       zzmm: '请选择', // 政治面貌
       zzmmText: '', // 政治面貌值
       email: '', // 邮箱
@@ -275,13 +276,13 @@ export default {
       xbText: '', // 性别值
       sfzjh: '', // 身份证件号
       address: '', // 地址
-      gj: '', //国家
-      gjText: '', //国家值
-      jk: '', //健康状况
+      gj: '', // 国家
+      gjText: '', // 国家值
+      jk: '', // 健康状况
       jkText: '', // 健康状况
       zj: '', // 宗教信仰
-      zjText: '', //宗教信仰值
-      xx: '', //血型
+      zjText: '', // 宗教信仰值
+      xx: '', // 血型
       xxText: '', // 血型值
       province: '请选择', // 省
       city: '请选择', // 市
@@ -292,17 +293,17 @@ export default {
       provinceData: [],
       cityData: [],
       countyData: [],
-      gh:'', // 工号
+      gh: '', // 工号
       xz: '请选择', // 任教学段
-      xzText: '',// 任教学段值
+      xzText: '', // 任教学段值
       zc: '请选择', // 职称
-      zcText: '', //职称值
+      zcText: '', // 职称值
       gw: '请选择', // 岗位
-      gwText : '', // 岗位值
-      xl: '请选择', //学历
-      xlText: '', //学历值
-      joinTime: '请选择', //参加工作时间
-      submitUser :{
+      gwText: '', // 岗位值
+      xl: '请选择', // 学历
+      xlText: '', // 学历值
+      joinTime: '请选择', // 参加工作时间
+      submitUser: {
         id: '',
         CSRQ: '',
         userName: '',
@@ -336,7 +337,6 @@ export default {
         GH: '',
         DWH: '',
         XQH: '',
-        XQH: '',
         ZGXLM: '',
         ZGXLMTEXT: '',
         WHCDM: '',
@@ -369,9 +369,9 @@ export default {
         GWJB: '',
         GWJBTEXT: '',
         XZ: '',
-        XZTEXT: ''
+        XZTEXT: '',
       },
-      submitMsg :{"submitUser":"","submitTea":""},
+      submitMsg: { submitUser: '', submitTea: '' },
       parent: {
         parentId: 0,
       },
@@ -422,7 +422,7 @@ export default {
       this.xx = data.sysUser.xXM;
       this.xxText = data.sysUser.xXMTEXT;
       this.zzmm = data.sysUser.zZMMM;
-      this.zzmmText =  data.sysUser.zZMMMTEXT;
+      this.zzmmText = data.sysUser.zZMMMTEXT;
 
       this.id = data.id;
       this.gh = data.gh;
@@ -466,7 +466,7 @@ export default {
       this.xxData.forEach((element) => {
         this.xxList.push(element.codeText);
       });
-      
+
       this.xzData = data.XZ;
       this.xzData.forEach((element) => {
         this.xzList.push(element.codeText);
@@ -479,7 +479,7 @@ export default {
       this.gwData.forEach((element) => {
         this.gwList.push(element.codeText);
       });
-      this.xlData= data.XL;
+      this.xlData = data.XL;
       this.xlData.forEach((element) => {
         this.xlList.push(element.codeText);
       });
@@ -697,61 +697,61 @@ export default {
         this.$toast('请填写家庭详细地址');
         return;
       }
-      if(this.gh === ''){
+      if (this.gh === '') {
         this.$toast('请填写工号');
         return;
       }
-      if(this.xz === '请选择' ||''){
+      if (this.xz === '请选择' || '') {
         this.$toast('请填写任教学段');
         return;
       }
-      
-      if(this.submitUser.XBM == "" || this.submitUser.XBMTEXT == ""){
+
+      if (this.submitUser.XBM === '' || this.submitUser.XBMTEXT === '') {
         this.submitUser.XBM = this.xb;
         this.submitUser.XBMTEXT = this.xbText;
       }
-      if(this.submitUser.MZM == "" || this.submitUser.MZMTEXT == ""){
+      if (this.submitUser.MZM === '' || this.submitUser.MZMTEXT === '') {
         this.submitUser.MZM = this.mz;
         this.submitUser.MZMTEXT = this.mzText;
       }
-      if(this.submitUser.ZZMMM == "" || this.submitUser.ZZMMMTEXT == ""){
+      if (this.submitUser.ZZMMM === '' || this.submitUser.ZZMMMTEXT === '') {
         this.submitUser.ZZMMM = this.zzmm;
         this.submitUser.ZZMMMTEXT = this.zzmmText;
       }
 
-      if(this.submitUser.XXM == "" || this.submitUser.XXMTEXT == ""){
+      if (this.submitUser.XXM === '' || this.submitUser.XXMTEXT === '') {
         this.submitUser.XXM = this.xx;
         this.submitUser.XXMTEXT = this.xxText;
       }
-      if(this.submitUser.JKZKM == "" || this.submitUser.JKZKMTEXT == ""){
+      if (this.submitUser.JKZKM === '' || this.submitUser.JKZKMTEXT === '') {
         this.submitUser.JKZKM = this.jk;
         this.submitUser.JKZKMTEXT = this.jkText;
       }
-      if(this.submitUser.GJDQM == "" ||  this.submitUser.GJDQMTEXT == ""){
+      if (this.submitUser.GJDQM === '' || this.submitUser.GJDQMTEXT === '') {
         this.submitUser.GJDQM = this.gj;
         this.submitUser.GJDQMTEXT = this.gjText;
       }
-      if(this.submitUser.XYZJM == "" || this.submitUser.XYZJMTEXT == ""){
+      if (this.submitUser.XYZJM === '' || this.submitUser.XYZJMTEXT === '') {
         this.submitUser.XYZJM = this.zj;
         this.submitUser.XYZJMTEXT = this.zjText;
       }
 
-      if(this.submitTea.XZ == "" || this.submitTea.XZTEXT == ""){
+      if (this.submitTea.XZ === '' || this.submitTea.XZTEXT === '') {
         this.submitTea.XZ = this.xz;
         this.submitTea.xzText = this.xzText;
       }
 
-      if(this.submitTea.ZC == "" || this.submitTea.ZCTEXT == ""){
+      if (this.submitTea.ZC === '' || this.submitTea.ZCTEXT === '') {
         this.submitTea.ZC = this.zc;
         this.submitTea.ZCTEXT = this.zcText;
       }
 
-      if(this.submitTea.GWJB == "" || this.submitTea.GWJBTEXT == ""){
+      if (this.submitTea.GWJB === '' || this.submitTea.GWJBTEXT === '') {
         this.submitTea.GWJB = this.gw;
         this.submitTea.GWJBTEXT = this.gwText;
       }
 
-      if(this.submitTea.ZGXLM == "" || this.submitTea.ZGXLMTEXT == ""){
+      if (this.submitTea.ZGXLM === '' || this.submitTea.ZGXLMTEXT === '') {
         this.submitTea.ZGXLM = this.xl;
         this.submitTea.ZGXLMTEXT = this.xlText;
       }
@@ -769,8 +769,8 @@ export default {
       this.submitTea.GH = this.gh;
       this.submitTea.CJGZNY = this.joinTime;
 
-      this.submitMsg["submitUser"] = this.submitUser;
-      this.submitMsg["submitTea"] = this.submitTea;
+      this.submitMsg.submitUser = this.submitUser;
+      this.submitMsg.submitTea = this.submitTea;
       this.submitTeaData(this.submitMsg);
     },
   },
