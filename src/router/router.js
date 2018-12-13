@@ -132,5 +132,12 @@ export default new Router({
         import(/* webpackChunkName: 'data' */ '@/views/mine/compInfo/baseCompInfoTea.vue'),
       meta: { webview, tabBar: true },
     },
+    {
+      path: '/curriculum',
+      name: 'curriculum',
+      component: () =>
+        import(/* webpackChunkName: 'data' */ '@/views/curriculum/schedule.vue'),
+      meta: { webview, tabBar: false },
+    },
   ],
 });

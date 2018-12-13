@@ -78,7 +78,7 @@ export default {
           this.$router.push('home');
         } else if (data.data.userType === '2' || data.data.userType === '3'
          || data.data.userType === '4' || data.data.userType === '5') {
-          this.$router.push('homeTea');
+          this.$router.push('home');
         }
       } else {
         this.$toast('服务器错误，请重新登录！');
