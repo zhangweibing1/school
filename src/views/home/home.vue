@@ -30,16 +30,16 @@
                 <ul>
                     <li class="application">
                         <img src="../../assets/myedu/kg.png" alt="">
-                        <p>考勤</p>
+                        <p>通讯录</p>
                     </li>
-                    <li class="application">
+                    <li class="application" @click="jump('curriculum')">
                         <img src="../../assets/myedu/kg.png" alt="">
-                        <p>考勤</p>
+                        <p>课表</p>
                     </li>
-                    <li class="application">
+                    <li class="application" @click="jump('timetable')">
                         <img src="../../assets/myedu/kg.png" alt="">
                         <span class="small">NEW</span>
-                        <p>考勤</p>
+                        <p>课表2</p>
                     </li>
                     <li class="application">
                         <img src="../../assets/myedu/kg.png" alt="">
@@ -100,6 +100,7 @@ export default {
   name: 'home',
   data() {
     return {
+      defaultImg: `this.src="${require('@/assets/tx@2x.png')}"`,
       BaNoticeAndNewList: [],
       noticeObject: {},
       newObject: {},
@@ -116,6 +117,9 @@ export default {
     this.getBaNoticeAndNew();
   },
   methods: {
+    jump(item) {
+      this.$router.push(item);
+    },
     async getBaNoticeAndNew() {
       this.queryParam.type = '1';
       this.queryParam.userId = this.$store.state.system.userInfo.id;

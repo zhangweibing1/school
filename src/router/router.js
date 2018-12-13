@@ -133,6 +133,13 @@ export default new Router({
       meta: { webview, tabBar: true },
     },
     {
+      path: '/curriculum',
+      name: 'curriculum',
+      component: () =>
+        import(/* webpackChunkName: 'data' */ '@/views/curriculum/schedule.vue'),
+      meta: { webview, tabBar: false },
+    },
+    {
       path: '/newsDetail/:id',
       name: 'newsDetail',
       component: () =>
