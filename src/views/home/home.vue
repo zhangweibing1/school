@@ -119,7 +119,7 @@ export default {
   methods: {
     jump(item) {
       this.$router.push(item);
-    },  
+    },
     async getBaNoticeAndNew() {
       this.queryParam.type = '1';
       this.queryParam.userId = this.$store.state.system.userInfo.id;
