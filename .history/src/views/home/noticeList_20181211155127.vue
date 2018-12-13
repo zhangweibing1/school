@@ -1,0 +1,163 @@
+<template>
+  <div class="notice">
+    
+    <van-tabs v-model="active">
+      <van-tab title="通知公告"></van-tab>
+      <van-tab title="新闻资讯"></van-tab>
+    </van-tabs>
+  </div>
+</template>
+
+<script>
+import { mapGetters } from 'vuex';
+import { Tab, Tabs } from 'vant';
+
+export default {
+  name: 'notice',
+  date() {
+    return {
+      active: 1,
+    };
+  },
+  methods: {
+    onClickLeft() {
+      this.$router.go(-1);
+    },
+    goDetail() {
+      this.$router.push('details');
+    },
+  },
+  computed: {
+    ...mapGetters('system', ['userInfo']),
+  },
+  mounted() {
+    console.log(this.$route.params.type);
+  },
+};
+</script>
+
+<style scoped>
+.notice {
+  padding: 44px 0 46px;
+}
+.wrapper {
+  width: 100%;
+  padding: 0px 12px;
+  background: #fff;
+}
+.one {
+  padding: 19px 0;
+  border-bottom: solid #e7e7e7 1px;
+}
+.one h4 {
+  font-size: 16px;
+  color: #1c1c1c;
+  font-weight: 600;
+}
+.content-block {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.bd {
+  width: 38px;
+  height: 18px;
+  font-weight: 600;
+  color: #ff1717;
+  font-size: 13px;
+  background: #ffeeee;
+  display: inline-block;
+  text-align: center;
+  line-height: 18px;
+  margin-left: 8px;
+}
+.neirong {
+  font-size: 16px;
+  color: #666666;
+  margin: 12px 0 !important;
+}
+.date img {
+  width: 13.5px;
+  height: 13.5px;
+  display: inline-block;
+}
+.ly {
+  height: 32px;
+  display: flex;
+  line-height: 30px;
+}
+.ly span {
+  font-size: 15px;
+  color: #666666;
+}
+.date p {
+  margin: 0;
+  color: #999999;
+  font-size: 14px;
+}
+.yd {
+  width: 38px;
+  height: 18px;
+  font-weight: 600;
+  color: #c1c1c1;
+  font-size: 13px;
+  background: #f6f6f6;
+  display: inline-block;
+  text-align: center;
+  line-height: 18px;
+  margin-left: 8px;
+}
+.wrapper .one:last-child {
+  border: 0;
+}
+/* 通知结束 */
+/* 资讯开始 */
+.list {
+  padding: 20px 0;
+  border-bottom: solid 1px #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+}
+.information .list:last-child {
+  border: 0;
+}
+.list_left {
+  width: 200px;
+}
+.list_left p {
+  font-size: 16px;
+  color: #1c1c1c;
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  max-height: 50px;
+  overflow: hidden;
+}
+.list_right {
+  width: 113px;
+  height: 80px;
+  overflow: hidden;
+}
+.list_right img {
+  width: 100%;
+}
+.list_left2 {
+  width: 100%;
+}
+.list_left2 p {
+  font-size: 16px;
+  color: #1c1c1c;
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  max-height: 50px;
+  overflow: hidden;
+}
+.time {
+  font-size: 14px;
+  color: #999999 !important;
+  font-weight: 500 !important;
+  margin-top: 12px !important;
+}
+</style>

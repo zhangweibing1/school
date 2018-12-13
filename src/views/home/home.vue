@@ -61,36 +61,30 @@
             <div class="wrapper_top">
                 <div class="blue"></div>
                 <span class="title"> <i>通知</i> </span>
-                <span class="more">更多>></span>
+                <span class="more" @click="moreThing(0)">更多>></span>
             </div>
             <div class="line"></div>
-            <div class="gonggao">
-                <p class="biaoti">欢迎使用青峰教务系统</p>
-                <p class="continer">青峰教务系统是青峰软件有限公司专为小学、初 中和高中研发的智能化校园教务办公系统，旨在 解决学校教务办公、家长查询...
-                </p>
+                <div class="gonggao"  @click="detail(1)">
+                <p class="biaoti">{{this.noticeObject.noticeTitle}}</p>
+                <p class="continer">{{this.noticeObject.content}}</p>
                 <div class="time">
                     <img src="../../assets/myedu/time.png" alt="">
-                    <span>5分钟前</span>
+                    <span>{{this.noticeObject.sendTime}}</span>
                 </div>
                 <div class="line"></div>
             </div>
-            <div class="gonggao">
-                <p class="biaoti">欢迎使用青峰教务系统</p>
-                <p class="continer">青峰教务系统是青峰软件有限公司专为小学、初 中和高中研发的智能化校园教务办公系统，旨在 解决学校教务办公、家长查询...
-                </p>
-                <div class="time">
-                    <img src="../../assets/myedu/time.png" alt="">
-                    <span>5分钟前</span>
-                </div>
-                <div class="line"></div>
+            <div class="wrapper_top">
+                <div class="blue"></div>
+                <span class="title"> <i>校园新闻</i> </span>
+                <span class="more" @click="moreThing(1)">更多>></span>
             </div>
-            <div class="gonggao">
-                <p class="biaoti">欢迎使用青峰教务系统</p>
-                <p class="continer">青峰教务系统是青峰软件有限公司专为小学、初 中和高中研发的智能化校园教务办公系统，旨在 解决学校教务办公、家长查询...
-                </p>
+            <div class="line"></div>
+            <div class="news" @click="detail(2)">
+                <p class="biaoti">{{this.newObject.noticeTitle}}</p>
+                <p class="continer">{{this.newObject.content}}</p>
                 <div class="time">
                     <img src="../../assets/myedu/time.png" alt="">
-                    <span>5分钟前</span>
+                    <span>{{this.newObject.sendTime}}</span>
                 </div>
                 <div class="line"></div>
             </div>
@@ -99,20 +93,62 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import { loadBaNoticeAndNew } from '@/services/home';
 
 export default {
   name: 'home',
   data() {
     return {
       defaultImg: `this.src="${require('@/assets/tx@2x.png')}"`,
+      BaNoticeAndNewList: [],
+      noticeObject: {},
+      newObject: {},
+      queryParam: {
+        type: '',
+        userId: '',
+      },
     };
+  },
+  computed: {
+    ...mapGetters('system', ['userInfo']),
+  },
+  mounted() {
+    this.getBaNoticeAndNew();
   },
   methods: {
     jump(item) {
       this.$router.push(item);
+    },  
+    async getBaNoticeAndNew() {
+      this.queryParam.type = '1';
+      this.queryParam.userId = this.$store.state.system.userInfo.id;
+      const { data } = await loadBaNoticeAndNew(this.queryParam);
+      if (data.notice != null) {
+        const notice = data.notice;
+        notice.records[0].content = notice.records[0].content
+          .replace(/<\/?.+?>/g, '').replace(/ /g, '').substring(0, 20);
+        notice.records[0].sendTime = notice.records[0].sendTime.substring(0, 10);
+        [this.noticeObject] = notice.records;
+      }
+      if (data.news != null) {
+        const news = data.news;
+        news.records[0].content = news.records[0].content
+          .replace(/<\/?.+?>/g, '').replace(/ /g, '').substring(0, 20);
+        news.records[0].sendTime = news.records[0].sendTime.substring(0, 10);
+        [this.newObject] = news.records;
+      }
     },
-  },
-  mounted() {
+    detail(value) {
+      if (value === 1) {
+        this.$router.push(`/newsDetail/${this.noticeObject.id}`);
+      } else {
+        this.$router.push(`/newsDetail/${this.newObject.id}`);
+      }
+    },
+    moreThing(type) {
+      this.$router.push(`/noticeList/${type}`);
+    },
   },
 };
 </script>
@@ -273,6 +309,11 @@ export default {
 }
 
 .gonggao{
+    padding:20px 18px 0 18px;
+    background: #fff;
+    /* border-bottom: solid 1px #e5e5e5; */
+}
+.news{
     padding:20px 18px 0 18px;
     background: #fff;
     /* border-bottom: solid 1px #e5e5e5; */
