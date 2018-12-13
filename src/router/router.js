@@ -139,5 +139,19 @@ export default new Router({
         import(/* webpackChunkName: 'data' */ '@/views/curriculum/schedule.vue'),
       meta: { webview, tabBar: false },
     },
+    {
+      path: '/newsDetail/:id',
+      name: 'newsDetail',
+      component: () =>
+        import(/* webpackChunkName: 'data' */ '@/views/home/noticeDetails.vue'),
+      meta: { webview, tabBar: true },
+    },
+    {
+      path: '/noticeList/:type',
+      name: 'noticeList',
+      component: () =>
+        import(/* webpackChunkName: 'data' */ '@/views/home/noticeList.vue'),
+      meta: { webview, tabBar: true },
+    },
   ],
 });
