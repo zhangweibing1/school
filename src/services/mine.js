@@ -47,65 +47,88 @@ export function setNewPsd(data) {
 }
 
 export function getMySQ(data) {
-    return request({
-        method: 'post',
-        url: '/api/v2/sysMysqMobile/read/getmysq',
-        data,
-    });
+  return request({
+    method: 'post',
+    url: '/api/v2/sysMysqMobile/read/getmysq',
+    data,
+  });
 }
 /**
  * 提交反馈
- * @param {} data 
+ * @param {} data
  */
 export function submitFeedBack(data) {
-    return request({
-        method: 'put',
-        url: '/api/mobileFeedBack/write/saveFeedBack/',
-        data,
-    });
+  return request({
+    method: 'put',
+    url: '/api/mobileFeedBack/write/saveFeedBack/',
+    data,
+  });
 }
 
 /**
  * 提交密保结果
- * @param {} data 
+ * @param {} data
  */
 export function submitMqData(data) {
-    return request({
-        method: 'post',
-        url: '/api/v2/sysMysqMobile/write/updateMqData/',
-        data,
-    });
+  return request({
+    method: 'post',
+    url: '/api/v2/sysMysqMobile/write/updateMqData/',
+    data,
+  });
 }
 /**
  * 根据账号查询密保
- * @param {} data 
+ * @param {} data
  */
 export function queryMqByAccount(data) {
-    return request({
-        method: 'post',
-        url: '/api/v2/sysMysqMobile/read/queryMqByAccount',
-        data,
-    });
+  return request({
+    method: 'post',
+    url: '/api/v2/sysMysqMobile/read/queryMqByAccount',
+    data,
+  });
 }
 /**
  * 根据账号查询密保
- * @param {} data 
+ * @param {} data
  */
 export function queryMqByAccountT(data) {
-    return request({
-        method: 'post',
-        url: '/api/v2/sysMysqMobile/read/queryMqByAccountT',
-        data,
-    });
+  return request({
+    method: 'post',
+    url: '/api/v2/sysMysqMobile/read/queryMqByAccountT',
+    data,
+  });
 }
 /**
  * 修改密码
- * @param {} data 
+ * @param {} data
  */
 export function updatePwd(data) {
-    return request({
-        method: 'post',
-        url: '/api/v2/sysMysqMobile/write/updateLogin',
-        data,
-    });
+  return request({
+    method: 'post',
+    url: '/api/v2/sysMysqMobile/write/updateLogin',
+    data,
+  });
+}
+
+/**
+ * 查询学生同班同学
+ * @param {} data
+ */
+export function queryClassStuByStu(data) {
+  return request({
+    method: 'put',
+    url: '/api/v1/mobileEduPerson/read/queryClassStuByStu',
+    data,
+  });
+}
+/**
+ * 查询学生同班同学
+ * @param {} data
+ */
+export function getOrgUser(data) {
+  return request({
+    method: 'put',
+    url: '/api/orgMobile/read/getOrgUser',
+    data,
+  });
 }

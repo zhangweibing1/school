@@ -153,5 +153,12 @@ export default new Router({
         import(/* webpackChunkName: 'data' */ '@/views/home/noticeList.vue'),
       meta: { webview, tabBar: true },
     },
+    {
+      path: '/baseContact',
+      name: 'baseContact',
+      component: () =>
+        import(/* webpackChunkName: 'data' */ '@/views/mine/contact/contact.vue'),
+      meta: { webview, tabBar: true },
+    },
   ],
 });
