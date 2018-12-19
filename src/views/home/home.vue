@@ -6,17 +6,12 @@
                 <div class="touxiang">
                     <img src="../../assets/myedu/xj.png" alt="">
                 </div>
-                <span>马小帅</span>
+                <span>{{username}}</span>
             </div>
         </div>
         <!-- 头部结束 -->
         <div class="banner">
             <img src="../../assets/myedu/banner.png" alt="">
-        </div>
-        <div class="message_2">
-            <span class="message_title"> <i> 消息</i> </span>
-            <span class="message_type">考勤</span>
-            <span class="message_content">还有4分钟就要上课了，记得打卡有4分钟就要上课了，记得打卡</span>
         </div>
         <!-- 应用开始 -->
         <div class="wrapper">
@@ -58,36 +53,38 @@
         </div>
         <!-- 应用结束 -->
         <div class="wrapper_3">
-            <div class="wrapper_top">
-                <div class="blue"></div>
-                <span class="title"> <i>通知</i> </span>
-                <span class="more" @click="moreThing(0)">更多>></span>
+          <div class="wrapper_top">
+              <div class="blue"></div>
+              <span class="title"> <i>通知</i> </span>
+              <span class="more" @click="moreThing(0)">更多>></span>
+          </div>
+          <div class="line"></div>
+          <div class="gonggao"  @click="detail(1)" v-if="gshow">
+            <p class="biaoti">{{this.noticeObject.noticeTitle}}</p>
+            <p class="continer">{{this.noticeObject.content}}</p>
+            <div class="time">
+              <img src="../../assets/myedu/time.png" alt="">
+              <span>{{this.noticeObject.sendTime}}</span>
             </div>
             <div class="line"></div>
-                <div class="gonggao"  @click="detail(1)">
-                <p class="biaoti">{{this.noticeObject.noticeTitle}}</p>
-                <p class="continer">{{this.noticeObject.content}}</p>
-                <div class="time">
-                    <img src="../../assets/myedu/time.png" alt="">
-                    <span>{{this.noticeObject.sendTime}}</span>
-                </div>
-                <div class="line"></div>
-            </div>
-            <div class="wrapper_top">
-                <div class="blue"></div>
-                <span class="title"> <i>校园新闻</i> </span>
-                <span class="more" @click="moreThing(1)">更多>></span>
+          </div>
+          <div v-if="ghide"><p class="continer">暂无公告</p></div>
+          <div class="wrapper_top">
+            <div class="blue"></div>
+            <span class="title"> <i>校园新闻</i> </span>
+            <span class="more" @click="moreThing(1)">更多>></span>
+          </div>
+          <div class="line"></div>
+          <div class="news" @click="detail(2)" v-if="nshow">
+            <p class="biaoti">{{this.newObject.noticeTitle}}</p>
+            <p class="continer">{{this.newObject.content}}</p>
+            <div class="time">
+              <img src="../../assets/myedu/time.png" alt="">
+              <span>{{this.newObject.sendTime}}</span>
             </div>
             <div class="line"></div>
-            <div class="news" @click="detail(2)">
-                <p class="biaoti">{{this.newObject.noticeTitle}}</p>
-                <p class="continer">{{this.newObject.content}}</p>
-                <div class="time">
-                    <img src="../../assets/myedu/time.png" alt="">
-                    <span>{{this.newObject.sendTime}}</span>
-                </div>
-                <div class="line"></div>
-            </div>
+          </div>
+          <div v-if="nhide"><p class="continer">暂无新闻</p></div>
         </div>
     </div>
 </template>
@@ -101,6 +98,7 @@ export default {
   data() {
     return {
       defaultImg: `this.src="${require('@/assets/tx@2x.png')}"`,
+      username: this.$store.state.system.userInfo.userName,
       BaNoticeAndNewList: [],
       noticeObject: {},
       newObject: {},
@@ -108,6 +106,10 @@ export default {
         type: '',
         userId: '',
       },
+      nshow: true,
+      nhide: false,
+      gshow: true,
+      ghide: false,
     };
   },
   computed: {
@@ -124,19 +126,30 @@ export default {
       this.queryParam.type = '1';
       this.queryParam.userId = this.$store.state.system.userInfo.id;
       const { data } = await loadBaNoticeAndNew(this.queryParam);
-      if (data.notice != null) {
+      console.log(data.notice.length);
+      if (data.notice != null && data.notice.records.length > 0) {
+        this.gshow = true;
+        this.ghide = false;
         const notice = data.notice;
         notice.records[0].content = notice.records[0].content
           .replace(/<\/?.+?>/g, '').replace(/ /g, '').substring(0, 20);
         notice.records[0].sendTime = notice.records[0].sendTime.substring(0, 10);
         [this.noticeObject] = notice.records;
+      } else {
+        this.gshow = false;
+        this.ghide = true;
       }
-      if (data.news != null) {
+      if (data.news != null && data.news.records.length > 0) {
+        this.nshow = true;
+        this.nhide = false;
         const news = data.news;
         news.records[0].content = news.records[0].content
           .replace(/<\/?.+?>/g, '').replace(/ /g, '').substring(0, 20);
         news.records[0].sendTime = news.records[0].sendTime.substring(0, 10);
         [this.newObject] = news.records;
+      } else {
+        this.nshow = false;
+        this.nhide = true;
       }
     },
     detail(value) {
@@ -155,6 +168,7 @@ export default {
 <style lang="scss" scoped>
 .indexView{
     font-family: '微软雅黑';
+    padding-bottom: 25px;
 }
 .top{
     padding: 0 15px;
