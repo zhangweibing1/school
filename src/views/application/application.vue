@@ -5,37 +5,15 @@
       title="应用"
       fixed
       @click-left="onClickLeft"/>
-        <van-tabs>
-          <van-tab v-for="index in menuList" :title="index.name" :key="index.id">
-            <div class="top module">
-              <div class="moduleName">{{index.name}}</div>
-              <ul class="menuc">
-                <li v-for="item in index.list" :key="item.id">
-                  <router-link :to="item.url">
-                    <img :src="require('@/assets/tx@2x.png')" alt="">
-                    <p>{{item.name}}</p>
-                  </router-link>
-                </li>
-              </ul>
-            </div>
-          </van-tab>
-        </van-tabs>
-        <ul class="menut">
-          <li v-for="item in menuTitle" :key="item.id">
-            <a href="javascript:void(0)" :class="{active: isActive === item.id}"
-             @click="setActive(item.id)">
-              {{item.name}}</a>
-          </li>
-        </ul>
         <ul class="menup">
-          <li class="top module" v-for="i in menus" :key="i.id" :id="i.id">
-            <div class="moduleName" id="item.id">{{i.codeText}}</div>
+          <li class="top module" v-for="menu in menuList" :key="menu.id">
+            <div class="moduleName" id="item.id">{{menu.name}}</div>
             <ul class="menuc">
-              <li v-for="j in i.sysMenuList" :key="j.id">
-                <router-link :to="j.request">
-                  <img :src="$store.state.system.sftpPath + j.frontIconcls"
+              <li v-for="j in menu.list" :key="j.id">
+                <router-link :to="j.url">
+                  <img :src="j.imgUrl"
                     :onerror="defaultImg" alt="">
-                  <p>{{j.menuName}}</p>
+                  <p>{{j.name}}</p>
                 </router-link>
               </li>
             </ul>
@@ -51,7 +29,7 @@ export default {
   name: 'application',
   data() {
     return {
-      defaultImg: `this.src="${require('@/assets/mrtx.png')}"`,
+      defaultImg: `this.src="${require('@/assets/word.png')}"`,
       menuList: [
         {
           id: 'health',
@@ -61,11 +39,13 @@ export default {
               id: 'onlineBooking',
               name: '在线预约',
               url: 'onlineBooking',
+              imgUrl: '',
             },
             {
               id: 'stuList',
               name: '学生列表',
               url: 'stuList',
+              imgUrl: '',
             },
           ],
         },
@@ -78,26 +58,31 @@ export default {
               id: 'workApply',
               name: '岗位申请',
               url: 'workApply',
+              imgUrl: '',
             },
             {
               id: 'workInfo',
               name: '岗位详情',
               url: 'workInfo',
+              imgUrl: '',
             },
             {
               id: 'workProposer',
               name: '申请人信息',
               url: 'workProposer',
+              imgUrl: '',
             },
             {
               id: 'workHistory',
               name: '岗位申请历史',
               url: 'workHistory',
+              imgUrl: '',
             },
             {
               id: 'myWork',
               name: '我的岗位',
               url: 'workInfo',
+              imgUrl: '',
             },
           ],
         },
@@ -110,21 +95,25 @@ export default {
               id: 'applyFor',
               name: '会议室申请',
               url: 'applyFor',
+              imgUrl: '',
             },
             {
               id: 'myApplyFor',
               name: '我的申请',
               url: 'myApplyFor',
+              imgUrl: '',
             },
             {
               id: 'applyForSP',
               name: '会议室申请审批',
               url: 'applyForSP',
+              imgUrl: '',
             },
             {
               id: 'evaluationList',
               name: '会议室评价',
               url: 'evaluationList',
+              imgUrl: '',
             },
           ],
         },
@@ -137,23 +126,13 @@ export default {
               id: 'apartemntSafety',
               name: '安全检查管理',
               url: 'apartemntSafety',
+              imgUrl: '',
             },
             {
               id: 'apartemntVisitor',
               name: '访客登记',
               url: 'apartemntVisitor',
-            },
-          ],
-        },
-        {
-          id: 'grant',
-          name: '奖助',
-          url: 'grant',
-          list: [
-            {
-              id: 'grantNoticeList',
-              name: '公式列表',
-              url: 'grantNoticeList',
+              imgUrl: '',
             },
           ],
         },
@@ -165,37 +144,13 @@ export default {
               id: 'classList',
               name: '新生复查',
               url: 'classList',
+              imgUrl: '',
             },
             {
               id: 'completeInfo',
               name: '完善信息',
               url: 'completeInfo',
-            },
-          ],
-        },
-        {
-          id: 'replace',
-          name: '证件补办',
-          list: [
-            {
-              id: 'replace',
-              name: '补办申请',
-              url: 'replace',
-            },
-            {
-              id: 'replaceSPfdyList',
-              name: '补办审批（辅导员）',
-              url: 'replaceSPfdyList',
-            },
-            {
-              id: 'replaceSPyxList',
-              name: '补办审批（院系）',
-              url: 'replaceSPyxList',
-            },
-            {
-              id: 'replaceSPxscList',
-              name: '补办审批（学生处）',
-              url: 'replaceSPxscList',
+              imgUrl: '',
             },
           ],
         },
@@ -207,26 +162,31 @@ export default {
               id: 'leave',
               name: '请假',
               url: 'leave',
+              imgUrl: '',
             },
             {
               id: 'leaveHistory',
               name: '请假历史',
               url: 'leaveHistory',
+              imgUrl: '',
             },
             {
               id: 'leaveCancel',
               name: '销假',
               url: 'leaveCancel',
+              imgUrl: '',
             },
             {
               id: 'leaveBacklog',
-              name: '请假待办列表',
+              name: '请假待办',
               url: 'leaveBacklog',
+              imgUrl: '',
             },
             {
               id: 'leaveCancelList',
               name: '销假列表',
               url: 'leaveCancelList',
+              imgUrl: '',
             },
           ],
         },
@@ -258,7 +218,7 @@ export default {
     },
   },
   mounted() {
-    this.getMenus();
+
   },
 };
 </script>

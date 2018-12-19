@@ -3,7 +3,7 @@
     <van-nav-bar title="资讯" left-text="返回" right-text left-arrow fixed @click-left="onClickLeft"/>
     <van-tabs v-model="active"  @click="choseTab">
       <van-tab title="通知公告">
-        <span v-for="n in noticeList" :key="n">
+        <span v-for="n in noticeList" :key="n.id">
           <div class="wrapper">
             <div class="one" @click="showDetail(n.id)">
             <h4>
@@ -20,7 +20,7 @@
         </span>
       </van-tab>
       <van-tab title="新闻资讯">
-        <span v-for="n in newsList" :key="n">
+        <span v-for="n in newsList" :key="n.id">
          <div class="wrapper">
             <div class="one"  @click="showDetail(n.id)">
             <h4>

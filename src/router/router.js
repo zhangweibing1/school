@@ -32,6 +32,12 @@ export default new Router({
       meta: { webview, tabBar: true },
     },
     {
+      path: '/application',
+      name: 'application',
+      component: () => import('@/views/application/application.vue'),
+      meta: { webview, tabBar: true },
+    },
+    {
       path: '/forgotNew',
       name: 'forgotNew',
       component: () =>

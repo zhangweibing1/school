@@ -4,23 +4,25 @@
             <div class="touxiang">
                 <img src="../../assets/myedu/touxiang.png" alt="">
             </div>
-            <p class="name">马小帅</p>
-            <p class="class">图形图像制作1301班</p>
+            <p class="name">{{username}}</p>
+            <p class="class">{{sfzjh}}</p>
         </div>
         <div class="picture">
             <img src="../../assets/myedu/one.png" alt="">
         </div>
         <div class="wrapper">
             <ul>
-                <li v-if="$store.state.system.userInfo.userType == 1" class="list" @click="jump('baseCompInfoStu')">
+                <li v-if="$store.state.system.userInfo.userType == 1" class="list"
+                @click="jump('baseCompInfoStu')">
                     <img class="icon" src="../../assets/myedu/icon_2.png" alt="">
-                    <span>学生信息编辑</span>
+                    <span>信息编辑</span>
                     <img class="right" src="../../assets/myedu/right.png" alt="">
                 </li>
 
-                <li v-if="$store.state.system.userInfo.userType == 2" class="list" @click="jump('baseCompInfoTea')">
+                <li v-if="$store.state.system.userInfo.userType == 2" class="list"
+                @click="jump('baseCompInfoTea')">
                     <img class="icon" src="../../assets/myedu/icon_2.png" alt="">
-                    <span>教师信息编辑</span>
+                    <span>信息编辑</span>
                     <img class="right" src="../../assets/myedu/right.png" alt="">
                 </li>
 
@@ -56,6 +58,8 @@ export default {
   name: 'me',
   data() {
     return {
+      username: this.$store.state.system.userInfo.userName,
+      sfzjh: this.$store.state.system.userInfo.sFZJH,
       defaultImg: `this.src="${require('@/assets/tx@2x.png')}"`,
     };
   },

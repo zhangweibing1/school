@@ -18,7 +18,7 @@
           <van-button size="large" class="btn blue" @click="submit()">登录</van-button>
         </div>
       </div>
-    <div class="foot">青峰软件有限公司提供技术支持</div>
+    <div class="foot">青峰软件股份有限公司提供技术支持</div>
   </div>
 </template>
 

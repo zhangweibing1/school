@@ -268,6 +268,7 @@ export default {
           });
         }
         if (this.myTimeTable.dkjskbList) {
+          console.log(this.myTimeTable.dkjskbList);
           this.myTimeTable.dkjskbList.forEach((item, index) => {
             const tdDom = this.$refs[`t${item.weekid}_${item.typeid}`];
             tdDom.innerHTML = item.classInfo.bJMC;
