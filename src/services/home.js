@@ -14,7 +14,7 @@ export function loadBaNoticeAndNew(data = {}) {
 }
 /**
  * 公告信息详情
- * @param {} data 
+ * @param {} data
  */
 export function loadBaNoticeAndNewDetail(data = {}) {
   return request({

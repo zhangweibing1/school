@@ -18,11 +18,11 @@ export function areaData(data) {
  * @return {[type]}         [description]
  */
 export function areaData(data) {
-    return request({
-        method: 'put',
-        url: '/api/cityareaInfoMobile/read/allList',
-        data,
-    });
+  return request({
+    method: 'put',
+    url: '/api/cityareaInfoMobile/read/allList',
+    data,
+  });
 }
 
 /**
@@ -31,11 +31,11 @@ export function areaData(data) {
  * @return {[type]}         [description]
  */
 export function submitData(data = {}) {
-    return request({
-        method: 'post',
-        url: '/api/sysUserMobile/write/updateUser',
-        data,
-    });
+  return request({
+    method: 'post',
+    url: '/api/mobileSysUser/write/updateUser',
+    data,
+  });
 }
 
 /**
@@ -44,11 +44,11 @@ export function submitData(data = {}) {
  * @return {[type]}         [description]
  */
 export function submitTeaData(data = {}) {
-    return request({
-        method: 'post',
-        url: '/api/sysUserMobile/write/updateUser',
-        data,
-    });
+  return request({
+    method: 'post',
+    url: '/api/mobileSysUser/write/updateUser',
+    data,
+  });
 }
 
 /**
@@ -57,11 +57,11 @@ export function submitTeaData(data = {}) {
  * @return {[type]}         [description]
  */
 export function Dic() {
-    return request({
-        method: 'put',
-        url: '/api/dicMobile/read/dic/List',
-        data: {},
-    });
+  return request({
+    method: 'put',
+    url: '/api/dicMobile/read/dic/List',
+    data: {},
+  });
 }
 
 /**
@@ -70,11 +70,11 @@ export function Dic() {
  * @return {[type]}         [description]
  */
 export function getStuDetail(data = {}) {
-    return request({
-        method: 'put',
-        url: '/api/sysUserMobile/read/readStu',
-        data,
-    });
+  return request({
+    method: 'put',
+    url: '/api/mobileSysUser/read/readStu',
+    data,
+  });
 }
 /**
  * 查询教师详细信息
@@ -82,9 +82,9 @@ export function getStuDetail(data = {}) {
  * @return {[type]}         [description]
  */
 export function getTeaDetail(data = {}) {
-    return request({
-        method: 'put',
-        url: '/api/sysUserMobile/read/queryDetail',
-        data,
-    });
+  return request({
+    method: 'put',
+    url: '/api/mobileSysUser/read/queryDetail',
+    data,
+  });
 }

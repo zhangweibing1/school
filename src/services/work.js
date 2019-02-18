@@ -13,11 +13,11 @@ import request from '@/utils/request';
  * @return {[type]}         [description]
  */
 export function updatePlace(data) {
-    return request({
-        method: 'post',
-        url: '/api/mobileEmployBirthplaceApply/read/update',
-        data,
-    });
+  return request({
+    method: 'post',
+    url: '/api/mobileEmployBirthplaceApply/read/update',
+    data,
+  });
 }
 /**
  * 申请三方协议
@@ -35,11 +35,11 @@ export function updatePlace(data) {
  * @return {[type]}         [description]
  */
 export function updateProtocol(data) {
-    return request({
-        method: 'post',
-        url: '/api/mobileEmployThreeProtocol/read/update',
-        data,
-    });
+  return request({
+    method: 'post',
+    url: '/api/mobileEmployThreeProtocol/read/update',
+    data,
+  });
 }
 /**
  * 撤销三方协议
@@ -48,11 +48,11 @@ export function updateProtocol(data) {
  * @return {[type]}         [description]
  */
 export function updateRevoke(data) {
-    return request({
-        method: 'post',
-        url: '/api/mobileEmployThreeProtocol/read/updateRevoke',
-        data,
-    });
+  return request({
+    method: 'post',
+    url: '/api/mobileEmployThreeProtocol/read/updateRevoke',
+    data,
+  });
 }
 /**
  * 判断学生三方协议状态
@@ -60,11 +60,11 @@ export function updateRevoke(data) {
  * @return {[type]}         [description]
  */
 export function getThreeProtocol(data) {
-    return request({
-        method: 'put',
-        url: '/apimobileEmployThreeProtocol/read/getThreeProtocol',
-        data,
-    });
+  return request({
+    method: 'put',
+    url: '/apimobileEmployThreeProtocol/read/getThreeProtocol',
+    data,
+  });
 }
 
 /**
@@ -73,9 +73,9 @@ export function getThreeProtocol(data) {
  * @return
  */
 export function getWorkType() {
-    return request({
-        method: 'put',
-        url: '/api/mobileDic/read/dic',
-        data: { type: 'companyKind' },
-    });
+  return request({
+    method: 'put',
+    url: '/api/mobileDic/read/dic',
+    data: { type: 'companyKind' },
+  });
 }

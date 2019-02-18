@@ -29,7 +29,7 @@ export function login(data) {
 export function getUserInfo() {
   return request({
     method: 'put',
-    url: '/api/sysUserMobile/read/getCurrUserDetail',
+    url: '/api/mobileSysUser/read/getCurrUserDetail',
     data: {},
   });
 }
@@ -42,7 +42,7 @@ export function getUserInfo() {
 export function getUser(data) {
   return request({
     method: 'put',
-    url: '/api/sysUserMobile/read/readStu',
+    url: '/api/mobileSysUser/read/readStu',
     data,
   });
 }
